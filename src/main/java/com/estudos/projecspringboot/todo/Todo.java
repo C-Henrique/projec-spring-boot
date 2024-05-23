@@ -2,16 +2,25 @@ package com.estudos.projecspringboot.todo;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Size;
 
+@Entity
 public class Todo {
 
+	@Id
+	@GeneratedValue
 	private Integer id;
 	private String username;
 	@Size(min = 10, message = "Valor minimo não atendido.")
 	private String description;
 	private LocalDate targetDate;
 	private Boolean done;
+
+	public Todo() {
+	}
 
 	public Todo(Integer id, String username, String description, LocalDate targetDate, Boolean done) {
 		this.id = id;

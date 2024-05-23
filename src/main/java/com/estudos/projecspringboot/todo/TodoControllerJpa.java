@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import jakarta.validation.Valid;
 
-//@Controller
+@Controller
 @SessionAttributes("name")
-public class TodoController {
+public class TodoControllerJpa {
 	private TodoService todoService;
-
-	public TodoController(TodoService todoService) {
+	private TodoRepository todoRepository;
+	public TodoControllerJpa(TodoService todoService, TodoRepository todoRepository) {
 		this.todoService = todoService;
+		this.todoRepository = todoRepository;
 
 	}
 
@@ -28,7 +29,7 @@ public class TodoController {
 	public String listAllTodos(ModelMap model) {
 		String username = getLoggedInUsername(model);
 
-		List<Todo> list = todoService.findByUsername(username);
+		List<Todo> list = todoRepository.findByUsername(username);
 		model.put("todos", list);
 		return "listTodos";
 
